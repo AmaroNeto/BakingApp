@@ -49,7 +49,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             URL imageURL = NetworkUtils.parseToURL(recipe.getImage());
             Picasso.get()
                     .load(imageURL.toString())
-                    .centerInside()
                     .into(holder.image);
             holder.name.setTextColor(Color.WHITE);
         }

@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Lis
     ProgressBar mProgressBar;
 
     private MainViewModel mViewModel;
+    private int position = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,4 +95,5 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Lis
         intent.putExtra(RecipeDetailActivity.EXTRA_DATA, recipe);
         startActivity(intent);
     }
+
 }

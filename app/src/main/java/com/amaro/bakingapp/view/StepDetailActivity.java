@@ -51,6 +51,12 @@ public class StepDetailActivity extends AppCompatActivity {
             position = intent.getIntExtra(EXTRA_POSITION,0);
         }
 
+        if(savedInstanceState != null) {
+            position = savedInstanceState.getInt(EXTRA_POSITION);
+        }
+
+        setOrientationConfig();
+
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(pagerAdapter);
         mPager.setCurrentItem(position);
@@ -75,6 +81,17 @@ public class StepDetailActivity extends AppCompatActivity {
 
     }
 
+    private void setOrientationConfig() {
+        int currentOrientation = getResources().getConfiguration().orientation;
+        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+            setButtonsVisibility(View.VISIBLE);
+            getSupportActionBar().show();
+        } else {
+            setButtonsVisibility(View.INVISIBLE);
+            getSupportActionBar().hide();
+        }
+    }
+
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
@@ -91,35 +108,20 @@ public class StepDetailActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
-            //Reload fragment
-            pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-            mPager.setAdapter(pagerAdapter);
-            setButtonsVisibility(View.GONE);
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().hide();
-            }
-        } else {
-
-            //Reload fragment
-            pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-            mPager.setAdapter(pagerAdapter);
-            setButtonsVisibility(View.VISIBLE);
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().show();
-            }
-        }
-
-    }
-
     private void setButtonsVisibility(int visilibilty) {
         mPreviousButton.setVisibility(visilibilty);
         mNextButton.setVisibility(visilibilty);
+    }
+
+    @Override
+    protected void onPause() {
+        position = mPager.getCurrentItem();
+        super.onPause();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(EXTRA_POSITION, position);
+        super.onSaveInstanceState(outState);
     }
 }

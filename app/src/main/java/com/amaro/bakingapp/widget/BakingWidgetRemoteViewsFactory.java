@@ -11,7 +11,7 @@ import android.widget.RemoteViewsService;
 import com.amaro.bakingapp.R;
 import com.amaro.bakingapp.model.Recipe;
 import com.amaro.bakingapp.util.RetrofitConfig;
-import com.amaro.bakingapp.view.RecipeDetailActivity;
+import com.amaro.bakingapp.view.IngredientActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,8 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsService.Remote
         rv.setTextViewText(R.id.widge_title, mRecipes.get(position).getName());
 
         Intent fillInIntent = new Intent();
-        fillInIntent.putExtra(RecipeDetailActivity.EXTRA_DATA, mRecipes.get(position));
+        fillInIntent.putExtra(IngredientActivity.EXTRA_DATA,
+               mRecipes.get(position));
         rv.setOnClickFillInIntent(R.id.widgetItemContainer, fillInIntent);
 
         return rv;

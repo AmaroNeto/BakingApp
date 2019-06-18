@@ -11,6 +11,7 @@ import android.widget.RemoteViews;
 import androidx.annotation.NonNull;
 
 import com.amaro.bakingapp.R;
+import com.amaro.bakingapp.view.IngredientActivity;
 import com.amaro.bakingapp.view.RecipeDetailActivity;
 
 public class BakingAppWidget extends AppWidgetProvider {
@@ -49,7 +50,8 @@ public class BakingAppWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-    private static void setRemoteAdapter(Context context, @NonNull final RemoteViews views) {Intent clickIntentTemplate = new Intent(context, RecipeDetailActivity.class);
+    private static void setRemoteAdapter(Context context, @NonNull final RemoteViews views) {
+        Intent clickIntentTemplate = new Intent(context, IngredientActivity.class);
         views.setRemoteAdapter(R.id.widgetListView, new Intent(context, BakingWidgetRemoteViewsService.class));
 
         PendingIntent clickPendingIntentTemplate = TaskStackBuilder.create(context)
