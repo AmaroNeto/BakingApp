@@ -34,8 +34,5 @@ public class IngredientActivity extends AppCompatActivity {
                 actionBar.setTitle(recipe.getName());
             }
         }
-
-
-
     }
 }
